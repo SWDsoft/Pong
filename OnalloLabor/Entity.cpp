@@ -1,8 +1,12 @@
 #include "Entity.h"
 
+#include "defs.h"
+
 Entity::Entity(sf::Vector2f dim, sf::Vector2f pos)
 {
+	DEBUG(position.x);
 	body = sf::RectangleShape({dim.x,dim.y});
+	position = pos;
 	body.setPosition(pos);
 }
 

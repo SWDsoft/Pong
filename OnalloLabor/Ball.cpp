@@ -1,4 +1,5 @@
 #include "Ball.h"
+#include "defs.h"
 
 
 void
@@ -58,13 +59,15 @@ void
 Ball::checkSides(std::array<Entity*, 2> players)
 {
 
-	if (AABB::AABBSide(getPosition(), players[0]->getPosition()) || AABB::AABBSide(getPosition(), players[1]->getPosition()))
+	if (AABB::AABBSide(position, players[0]->getPosition(), { CONFIG::ball::w, CONFIG::ball::h }, { CONFIG::paddle_w, CONFIG::paddle_h }) ||
+		AABB::AABBSide(position, players[1]->getPosition(), { CONFIG::ball::w, CONFIG::ball::h }, { CONFIG::paddle_w, CONFIG::paddle_h }))
 	{
+		DEBUG("Collided");
 		dir_x *= -1;
 	}
 	else
 	{
-		if (this->getBody().getPosition().x <= 0 )
+		if (position.x <= 0 )
 		{
 			dir_x *= -1;
 
@@ -76,7 +79,7 @@ Ball::checkSides(std::array<Entity*, 2> players)
 
 		}
 
-		else if ((this->getBody().getPosition().x + CONFIG::ball::w) >= CONFIG::screen::w)
+		else if ((position.x + CONFIG::ball::w) >= CONFIG::screen::w)
 		{
 			dir_x *= -1;
 
@@ -87,7 +90,7 @@ Ball::checkSides(std::array<Entity*, 2> players)
 			lifeTime++;
 		}
 
-		if (this->getBody().getPosition().y <= 0 )
+		if (position.y <= 0 )
 		{
 			dir_y *= -1;
 
@@ -95,7 +98,7 @@ Ball::checkSides(std::array<Entity*, 2> players)
 			lifeTime++;
 		}
 
-		else if ((this->getBody().getPosition().y + CONFIG::ball::h) >= CONFIG::screen::h )
+		else if ((position.y + CONFIG::ball::h) >= CONFIG::screen::h )
 		{
 			dir_y *= -1;
 
@@ -128,8 +131,8 @@ Ball::Control(std::array<Entity*, 2> players, std::vector<Entity*> &balls)
 	}*/
 	
 
-	vec.x = this->getBody().getPosition().x + (Delta::getInstance()->getDelta() * speed_x * dir_x);
-	vec.y = this->getBody().getPosition().y + (Delta::getInstance()->getDelta() * speed_y * dir_y);
+	vec.x = position.x + (Delta::getInstance()->getDelta() * speed_x * dir_x);
+	vec.y = position.y + (Delta::getInstance()->getDelta() * speed_y * dir_y);
 
 	setPosition(vec);
 }

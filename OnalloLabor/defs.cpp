@@ -7,7 +7,7 @@ namespace CONFIG
 	float paddle_w = 20;
 
 	namespace left_paddle {
-		float x = 20;
+		float x = 0;
 		float y = 5;
 	};
 

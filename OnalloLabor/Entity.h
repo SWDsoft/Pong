@@ -5,7 +5,7 @@
 class Entity
 {
 
-private:	
+protected:	
 
 	sf::Vector2f position;
 	sf::RectangleShape body;

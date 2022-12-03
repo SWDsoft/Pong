@@ -4,13 +4,13 @@
 
 namespace AABB
 {
-	static bool AABBSide(sf::Vector2f a, sf::Vector2f b)
+	static bool AABBSide(const sf::Vector2f& a, const sf::Vector2f& b, const sf::Vector2f& a_size, const sf::Vector2f& b_size)
 	{
 		return (
-			a.x < b.x + CONFIG::paddle_w &&
-			b.x < a.x + CONFIG::paddle_w &&
-			a.y < b.y + CONFIG::paddle_h &&
-			b.y < a.y + CONFIG::paddle_h
+			a.x < b.x + b_size.x &&
+			b.x < a.x + a_size.x &&
+			a.y < b.y + b_size.y &&
+			b.y < a.y + a_size.y
 		);
 	}
 };
