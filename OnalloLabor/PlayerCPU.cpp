@@ -37,9 +37,13 @@ PlayerCPU::Control(std::array<Entity*, 2> players, std::vector<Entity*> &balls)
 			if (speed < maxSpeed)
 			{
 				if(speed < 0)
-					speed += acceleration * 5 * Delta::getInstance()->getDelta();
+					speed += acceleration * 10 * Delta::getInstance()->getDelta();
 				else
 					speed += acceleration * Delta::getInstance()->getDelta();
+			}
+			else
+			{
+				speed = maxSpeed;
 			}
 						
 
@@ -50,9 +54,13 @@ PlayerCPU::Control(std::array<Entity*, 2> players, std::vector<Entity*> &balls)
 			if (speed > (-1) * maxSpeed)
 			{
 				if (speed > 0)
-					speed -= acceleration * 5 * Delta::getInstance()->getDelta();
+					speed -= acceleration * 10 * Delta::getInstance()->getDelta();
 				else
 					speed -= acceleration * Delta::getInstance()->getDelta();
+			}
+			else
+			{
+				speed = -maxSpeed;
 			}
 
 			currentDirection = -1;
