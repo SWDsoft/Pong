@@ -56,7 +56,7 @@ Ball::AddBall()
 }
 
 void
-Ball::checkSides(std::array<Entity*, 2> players)
+Ball::checkSides(std::array<Entity*, 2> &players)
 {
 
 	if (AABB::AABBSide(position, players[0]->getPosition(), { CONFIG::ball::w, CONFIG::ball::h }, { CONFIG::paddle_w, CONFIG::paddle_h }) ||
@@ -64,6 +64,7 @@ Ball::checkSides(std::array<Entity*, 2> players)
 	{
 		DEBUG("Collided");
 		dir_x *= -1;
+		speed_x *= 1.05;
 	}
 	else
 	{
@@ -73,6 +74,9 @@ Ball::checkSides(std::array<Entity*, 2> players)
 
 			setPosition({ sf::Vector2f{500,500} });
 			ballInit();
+			players[1]->addScore();
+
+
 
 			wallPopCount++;
 			lifeTime++;
@@ -85,6 +89,7 @@ Ball::checkSides(std::array<Entity*, 2> players)
 
 			setPosition({ sf::Vector2f{500,500} });
 			ballInit();
+			players[0]->addScore();
 
 			wallPopCount++;
 			lifeTime++;
@@ -135,4 +140,12 @@ Ball::Control(std::array<Entity*, 2> players, std::vector<Entity*> &balls)
 	vec.y = position.y + (Delta::getInstance()->getDelta() * speed_y * dir_y);
 
 	setPosition(vec);
+}
+
+void
+Ball::addScore()
+{
+
+	;//
+
 }

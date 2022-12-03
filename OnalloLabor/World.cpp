@@ -1,6 +1,6 @@
 #include "World.h"
 
-std::array<Entity*, 2> World::getPlayers()
+std::array<Entity*, 2> &World::getPlayers()
 {
 	return players;
 }
@@ -34,3 +34,4 @@ World::UpdateEntities()
 	}
 
 }
+

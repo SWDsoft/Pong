@@ -17,13 +17,14 @@ private:
 	char dir_x,dir_y;
 
 	int wallPopCount;
+
 	int paddlePopCount;
 
 	int lifeTime;
 
 	void ballInit();
 
-	void checkSides(std::array<Entity*, 2> players);
+	void checkSides(std::array<Entity*, 2> &players);
 
 	bool AddBall();
 
@@ -35,6 +36,8 @@ public:
 	void Control(std::array<Entity*, 2> players, std::vector<Entity*> &balls) override;
 
 	int getLifeTime();
+
+	void addScore() override;
 
 	Ball(sf::Vector2f dim, sf::Vector2f pos) : Entity(dim, pos) { ballInit(); }
 	~Ball() { DEBUG("called"); };

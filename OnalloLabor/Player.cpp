@@ -5,28 +5,47 @@
 void
 Player::Control(std::array<Entity*, 2> players, std::vector<Entity*> &balls)
 {
+
 	int dir = 0;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
-		dir = 1;
+		if (speed < maxSpeed)
+			speed += acceleration * Delta::getInstance()->getDelta();
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
-		dir = -1;
+		if(speed > (-1)*maxSpeed)
+			speed -= acceleration * Delta::getInstance()->getDelta();
 	}
 	else
 	{
-		dir = 0; 
+		speed = 0;
 	}
 
 	sf::Vector2f vec;
 
+	if (getPosition().y < 0)
+	{
+		speed *= -1;
+	}
+	else if (getPosition().y + CONFIG::paddle_h > CONFIG::screen::h)
+	{
+		speed *= -1;
+	}
+	
+	vec.y = getPosition().y + (speed * Delta::getInstance()->getDelta());
 	vec.x = getPosition().x;
-	vec.y = balls[0]->getPosition().y/*getPosition().y + (dir * Delta::getInstance()->getDelta() * 1500)*/;
+	
 
 
 	setPosition(vec);
 
 
+}
+
+void
+Player::addScore()
+{
+	score++;
 }

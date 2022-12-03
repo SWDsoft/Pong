@@ -14,6 +14,7 @@ class World
 {
 private:
 
+
 	std::array<Entity*, 2> players =
 	{
 		new Player({CONFIG::paddle_w,CONFIG::paddle_h },{CONFIG::left_paddle::x,CONFIG::left_paddle::y}),
@@ -27,7 +28,9 @@ private:
 
 public:
 
-	std::array<Entity*, 2> getPlayers();
+	
+
+	std::array<Entity*, 2> &getPlayers();
 	std::vector<Entity*> getBalls();
 	void UpdateEntities();
 
