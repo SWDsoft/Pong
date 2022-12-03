@@ -22,11 +22,13 @@ PlayerCPU::Control(std::array<Entity*, 2> players, std::vector<Entity*> &balls)
 
 	if (!InRangeTop())
 	{
-		setPosition(sf::Vector2f{position.x,1});
+		setPosition(sf::Vector2f{position.x, 1});
+		speed = 0;
 	}
 	else if(!InRangeBottom())
 	{
-		setPosition(sf::Vector2f{ position.x,(CONFIG::screen::h - CONFIG::paddle_h)-1});
+		setPosition(sf::Vector2f{ position.x,(CONFIG::screen::h - CONFIG::paddle_h) - 1});
+		speed = 0;
 	}
 	else
 	{ 
@@ -35,7 +37,7 @@ PlayerCPU::Control(std::array<Entity*, 2> players, std::vector<Entity*> &balls)
 			if (speed < maxSpeed)
 			{
 				if(speed < 0)
-					speed += acceleration * 10 * Delta::getInstance()->getDelta();
+					speed += acceleration * 5 * Delta::getInstance()->getDelta();
 				else
 					speed += acceleration * Delta::getInstance()->getDelta();
 			}
@@ -48,7 +50,7 @@ PlayerCPU::Control(std::array<Entity*, 2> players, std::vector<Entity*> &balls)
 			if (speed > (-1) * maxSpeed)
 			{
 				if (speed > 0)
-					speed -= acceleration * 10 * Delta::getInstance()->getDelta();
+					speed -= acceleration * 5 * Delta::getInstance()->getDelta();
 				else
 					speed -= acceleration * Delta::getInstance()->getDelta();
 			}

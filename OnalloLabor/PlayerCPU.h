@@ -11,10 +11,10 @@
 class PlayerCPU : public Entity
 {
 private:
-	float acceleration = 1500;
+	float acceleration = 2500;
 	float breakAcceleration = 50;
 	float speed = 0;
-	float maxSpeed = 500;
+	float maxSpeed = 600;
 	int currentDirection = 0;
 public:
 
